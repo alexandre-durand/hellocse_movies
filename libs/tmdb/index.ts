@@ -1,1 +1,1 @@
-export { TMDBClient } from './client'
+export { TMDBClient } from "./client";
