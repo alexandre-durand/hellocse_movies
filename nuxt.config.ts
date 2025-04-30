@@ -9,5 +9,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/test-utils",
     "vuetify-nuxt-module",
+    "@nuxtjs/tailwindcss",
   ],
 });
