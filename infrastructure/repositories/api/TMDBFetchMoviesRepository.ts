@@ -10,7 +10,9 @@ export class TMDBFetchMoviesRepository implements FetchMoviesRepository {
 
     async fetchMovies(params: FetchMoviesRepositoryParams): Promise<Result<PageResult<Movie>, Error>> {
         try {
-            const response = await this.client.discover().discoverMovies(params);
+            const response = await this.client.discover().discoverMovies({
+                page: params.page
+            });
             return new SuccessResult({
                 page: response.page,
                 totalResults: response.total_results,
