@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { TMDBFecthMoviesRepository } from '../TMDBFetchMoviesRepository';
+import { TMDBFetchMoviesRepository } from '../TMDBFetchMoviesRepository';
 import { TMDBClient } from '../../../../libs/tmdb'; 
 
 describe('TMDBFetchMoviesRepository', () => {
@@ -19,18 +19,34 @@ describe('TMDBFetchMoviesRepository', () => {
       total_results: 100,
       total_pages: 10,
       results: [
-        { title: 'Movie 1' },
-        { title: 'Movie 2' },
+        { 
+          id: 1,
+          title: 'Movie 1',
+          poster_path: '/path/to/poster1.jpg',
+          overview: 'Overview of Movie 1',
+          vote_count: 100,
+          vote_average: 8.5,
+         },
+        { 
+          id: 2,
+          title: 'Movie 2',
+          poster_path: '/path/to/poster2.jpg',
+          overview: 'Overview of Movie 2',
+          vote_count: 200,
+          vote_average: 7.5,
+         },
       ],
     };
 
     mockDiscoverMovies.mockResolvedValue(mockApiResponse);
 
-    const repo = new TMDBFecthMoviesRepository(mockClient);
-    const result = await repo.fetchMovies(1);
+    const repo = new TMDBFetchMoviesRepository(mockClient);
+    const result = await repo.fetchMovies({
+      page: 1,
+    });
 
     expect(mockClient.discover).toHaveBeenCalled();
-    expect(mockDiscoverMovies).toHaveBeenCalledWith(1);
+    expect(mockDiscoverMovies).toHaveBeenCalledWith({ page: 1 });
 
     expect(result.ok).toBe(true);
     if (result.ok) {
@@ -39,8 +55,22 @@ describe('TMDBFetchMoviesRepository', () => {
         totalResults: 100,
         totalPages: 10,
         results: [
-          { title: 'Movie 1' },
-          { title: 'Movie 2' },
+          { 
+            id: 1,
+            title: 'Movie 1',
+            imageURL: '/path/to/poster1.jpg',
+            overview: 'Overview of Movie 1',
+            voteCount: 100,
+            voteRating: 8.5,
+           },
+          { 
+            id: 2,
+            title: 'Movie 2',
+            imageURL: '/path/to/poster2.jpg',
+            overview: 'Overview of Movie 2',
+            voteCount: 200,
+            voteRating: 7.5,
+           },
         ],
       });
     }
@@ -55,8 +85,10 @@ describe('TMDBFetchMoviesRepository', () => {
       results: [],
     });
 
-    const repo = new TMDBFecthMoviesRepository(mockClient);
-    const result = await repo.fetchMovies(1);
+    const repo = new TMDBFetchMoviesRepository(mockClient);
+    const result = await repo.fetchMovies({
+      page: 1
+  });
 
     expect(result.ok).toBe(true);
     if (result.ok) {

@@ -28,7 +28,22 @@ describe('FetchMoviesUseCase', () => {
       page: 1,
       totalResults: 2,
       totalPages: 1,
-      results: [{ title: 'Movie 1' }, { title: 'Movie 2' }],
+      results: [{
+        id: 1,
+        title: 'Movie 1',
+        imageURL: '/path/to/poster1.jpg',
+        overview: 'Overview of Movie 1',
+        voteCount: 100,
+        voteRating: 8.5,
+
+       }, { 
+        id: 2,
+        title: 'Movie 2',
+        imageURL: '/path/to/poster2.jpg',
+        overview: 'Overview of Movie 2',
+        voteCount: 200,
+        voteRating: 7.5,
+        }],
     };
 
     (movieRepository.fetchMovies as any).mockResolvedValue({ ok: true, data: pageResult });

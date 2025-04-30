@@ -1,16 +1,19 @@
 import type { Movie } from "~/domain/entities/Movie";
 import type { PageResult } from "~/domain/entities/PageResult";
-import type { FetchMoviesRepository, FetchMoviesRepositoryParams } from "~/domain/repositories/FetchMoviesRepository";
 import type { Result } from "~/domain/shared/result";
 import type { TMDBClient } from "~/libs/tmdb/client";
 import { FailureResult, SuccessResult } from "../../../domain/shared/result";
+import type { SearchMoviesRepository, SearchMoviesRepositoryParams } from "~/domain/repositories/SearchMoviesRepository";
 
-export class TMDBFetchMoviesRepository implements FetchMoviesRepository {
+export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
     constructor(private client: TMDBClient) {}
 
-    async fetchMovies(params: FetchMoviesRepositoryParams): Promise<Result<PageResult<Movie>, Error>> {
+    async searchMovies(params: SearchMoviesRepositoryParams): Promise<Result<PageResult<Movie>, Error>> {
         try {
-            const response = await this.client.discover().discoverMovies(params);
+            const response = await this.client.search().searchMovies({
+                query: params.query,
+                page: params.page,
+            });
             return new SuccessResult({
                 page: response.page,
                 totalResults: response.total_results,

@@ -11,7 +11,7 @@ export class FetchMoviesUseCase {
     constructor(private presenter: FetchMoviesPresenter, private movieRepository: FetchMoviesRepository) {}
 
     async execute(page: number): Promise<void> {
-        const result = await this.movieRepository.fetchMovies(page);
+        const result = await this.movieRepository.fetchMovies({ page });
         if (result.ok) { 
             this.presenter.success(result.data);
             return;
