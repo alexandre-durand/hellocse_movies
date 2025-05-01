@@ -45,8 +45,8 @@ import { TMDBSearchMoviesRepository } from '~/infrastructure/repositories/api/TM
         await fetchNextPage((page: number) => usecase.execute(props.search, page));
     }
 
-    const onLoad = ({done}) => {
-        fetchNextMovies()
+    async function onLoad ({done})  {
+        await fetchNextMovies()
         if (hasMorePages.value) {
             done('ok')
         } else {
@@ -54,11 +54,11 @@ import { TMDBSearchMoviesRepository } from '~/infrastructure/repositories/api/TM
         }
     }
 
-    watch(() => props.search, () => {
+    watchThrottled(() => props.search, async () => {
         reset()
-        fetchNextMovies();
+        await fetchNextMovies();
     }, {
-        immediate: true
+        throttle: 500
     })
    
 </script>

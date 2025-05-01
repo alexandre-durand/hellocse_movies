@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "vuetify-nuxt-module",
     "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt"
   ],
   vuetify: {
     vuetifyOptions: './vuetify.config.ts',
