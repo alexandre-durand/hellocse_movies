@@ -1,12 +1,11 @@
 <template>
-    <MovieDetails :movie-id="movieId" />
+  <MovieDetails :movie-id="movieId" />
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-
+const route = useRoute();
 
 const movieId = computed(() => {
-    return route.params.id
-})
+  return parseInt(route.params.id);
+});
 </script>

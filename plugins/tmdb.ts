@@ -1,7 +1,8 @@
-import { TMDBSingleton } from "~/services/TMDBSingleton"
+import { initTMDBClient } from "~/services/TMDBSingleton"
 
 export default defineNuxtPlugin(() => {
+    console.log("Initializing TMDB client...")
     const config = useRuntimeConfig()
     const tmdbApiKey = config.public.tmdbApiKey
-    TMDBSingleton.getInstance(tmdbApiKey)
+    initTMDBClient(tmdbApiKey)
 })

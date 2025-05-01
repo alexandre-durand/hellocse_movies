@@ -1,12 +1,13 @@
 import { TMDBClient } from "~/libs/tmdb";
 
-const instance: TMDBClient | null = null;
+let instance: TMDBClient | null = null;
 
 export function initTMDBClient(apiKey: string): TMDBClient {
   if (instance) {
     throw new Error("TMDBClient already initialized.");
   }
-  return new TMDBClient(apiKey);
+  instance = new TMDBClient(apiKey);
+  return instance;
 }
 
 export function getTMDBClient(): TMDBClient {
