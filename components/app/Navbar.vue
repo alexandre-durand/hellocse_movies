@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app elevation="1">
+    <v-app-bar app elevation="1" color="primary">
         <v-toolbar-title>HelloCSE movies</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon>
