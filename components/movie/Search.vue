@@ -1,0 +1,68 @@
+<template>
+    <v-infinite-scroll
+        @load="onLoad"
+        class="w-full"
+        color="primary">
+        search
+        <MovieList :movies="movies" />
+    </v-infinite-scroll>
+</template>
+
+<script setup lang="ts">
+    import type { Movie } from '@/domain/entities/Movie'
+    import type { PageResult } from '~/domain/entities/PageResult'
+    import { TMDBFetchMoviesRepository } from '@/infrastructure/repositories/api/TMDBFetchMoviesRepository'
+    import { TMDBSingleton } from '@/services/TMDBSingleton'
+import { SearchMoviesUseCase } from '~/usecases/SearchMoviesUseCase'
+import { MockSearchMoviesRepository } from '~/infrastructure/repositories/mock/MockSearchMoviesRepository'
+
+    const props = defineProps<{
+        search: string
+    }>()
+
+    const fetchMoviesRepository = new MockSearchMoviesRepository({
+        itemsPerPage: 5,
+        totalPages: 3
+    }) // new TMDBFetchMoviesRepository(TMDBSingleton.getInstance()
+
+    const { 
+        items: movies,
+        hasMorePages,
+        reset,
+        handlePageResult,
+        fetchNextPage
+    } = useInfiniteItems<Movie>();
+
+    const usecase = new SearchMoviesUseCase({
+        success(data: PageResult<Movie>) {
+            handlePageResult(data);
+        },
+        error(msg: string) {
+            console.log(msg);
+        },
+        invalidQuery() {
+            console.log('Invalid query')
+        }
+    }, fetchMoviesRepository);
+
+    async function fetchNextMovies() {
+        await fetchNextPage((page: number) => usecase.execute(props.search, page));
+    }
+
+    const onLoad = ({done}) => {
+        fetchNextMovies()
+        if (hasMorePages.value) {
+            done('ok')
+        } else {
+            done('empty')
+        }
+    }
+
+    watch(() => props.search, () => {
+        reset()
+        fetchNextMovies();
+    }, {
+        immediate: true
+    })
+   
+</script>
