@@ -3,30 +3,36 @@ import type { PageResult } from "@/domain/entities/PageResult";
 import { FailureResult, SuccessResult, type Result } from "@/domain/shared/result";
 import type { FetchMoviesRepository } from "~/domain/repositories/FetchMoviesRepository";
 
-export class MockFetchMoviesRepository implements FetchMoviesRepository {
-  private movies: Movie[] = [];
-  private totalPages: number = 0;
+export interface MockFetchMoviesRepositoryOptions {
+  totalPages?: number;
+  itemsPerPage?: number;
+}
 
-  constructor(totalPages: number) {
-    this.totalPages = totalPages;
+export class MockFetchMoviesRepository implements FetchMoviesRepository {
+  private totalPages: number;
+  private itemsPerPage: number;
+
+  constructor(options: MockFetchMoviesRepositoryOptions) {
+    this.totalPages = options.totalPages ?? 5;
+    this.itemsPerPage = options.itemsPerPage ?? 10;
   }
 
   async fetchMovies({ page }: { page: number }): Promise<Result<PageResult<Movie>, Error>> {
     if (page > this.totalPages) {
-        return new FailureResult(new Error("No more pages"));
+      return new FailureResult(new Error("No more pages"));
     }
 
     return new SuccessResult({
-        page,
-        totalPages: this.totalPages,
-        results: this.createMockMovies(page),
+      page,
+      totalPages: this.totalPages,
+      results: this.createMockMovies(page),
     });
   }
 
   private createMockMovies(page: number): Movie[] {
     const movies: Movie[] = [];
-    for (let i = 0; i < 20; i++) {
-        const id = (page- 1) * 20 + i;
+    for (let i = 0; i < this.itemsPerPage; i++) {
+      const id = (page - 1) * this.itemsPerPage + i;
       movies.push({
         id,
         title: `Movie ${id}`,

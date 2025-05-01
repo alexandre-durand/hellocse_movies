@@ -32,9 +32,15 @@ export function useInfiniteMovies(repository: FetchMoviesRepository) {
     isLoading.value = false;
   }
 
+  const hasMorePages = computed(() => {
+    if (totalPages.value === null) return false;
+    return currentPage.value <= totalPages.value;
+  });
+
   return {
     movies,
     isLoading,
+    hasMorePages,
     errorMessage,
     fetchNextPage,
   };
