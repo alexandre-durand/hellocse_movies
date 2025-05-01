@@ -5,8 +5,8 @@
             :src="movie.posterURL"
             cover
             />
-           <v-chip label color="yellow" variant="tonal" class="!absolute top-0 right-0">
-           {{ formatNumber(movie.voteRating) }} <v-icon class="ml-2">mdi-star</v-icon></v-chip>
+           <v-chip label color="white" variant="flat" class="!absolute top-2 right-2">
+           {{ formatNumberWithOneDigit(movie.voteRating) }} <v-icon class="ml-1">mdi-star</v-icon></v-chip>
         <v-card-title >{{ movie.title }}</v-card-title>
     </v-card>
 </template>

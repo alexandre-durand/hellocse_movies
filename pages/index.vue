@@ -11,10 +11,11 @@
                 variant="solo"
                 hide-details
                 single-line
+                clearable
                 class="mr-4"
             ></v-text-field>
         </v-app-bar>
-        <v-main>
+        <v-main> 
             <v-container fluid>
                 <component :is="moviesComponents" :search="search" />
             </v-container>

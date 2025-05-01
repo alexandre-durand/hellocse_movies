@@ -15,10 +15,10 @@
     import { TMDBSingleton } from '@/services/TMDBSingleton'
     import { MockFetchMoviesRepository } from '@/infrastructure/repositories/mock/MockFetchMoviesRepository'
 
-    const fetchMoviesRepository = new MockFetchMoviesRepository({
+    const fetchMoviesRepository = new TMDBFetchMoviesRepository(TMDBSingleton.getInstance()) /*new MockFetchMoviesRepository({
         itemsPerPage: 5,
         totalPages: 3
-    }) // new TMDBFetchMoviesRepository(TMDBSingleton.getInstance()
+    }) */// 
 
     const { 
         items: movies,

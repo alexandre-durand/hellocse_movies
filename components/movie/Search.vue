@@ -11,19 +11,15 @@
 <script setup lang="ts">
     import type { Movie } from '@/domain/entities/Movie'
     import type { PageResult } from '~/domain/entities/PageResult'
-    import { TMDBFetchMoviesRepository } from '@/infrastructure/repositories/api/TMDBFetchMoviesRepository'
     import { TMDBSingleton } from '@/services/TMDBSingleton'
 import { SearchMoviesUseCase } from '~/usecases/SearchMoviesUseCase'
-import { MockSearchMoviesRepository } from '~/infrastructure/repositories/mock/MockSearchMoviesRepository'
+import { TMDBSearchMoviesRepository } from '~/infrastructure/repositories/api/TMDBSearchMoviesRepository'
 
     const props = defineProps<{
         search: string
     }>()
 
-    const fetchMoviesRepository = new MockSearchMoviesRepository({
-        itemsPerPage: 5,
-        totalPages: 3
-    }) // new TMDBFetchMoviesRepository(TMDBSingleton.getInstance()
+    const fetchMoviesRepository = new TMDBSearchMoviesRepository(TMDBSingleton.getInstance());
 
     const { 
         items: movies,

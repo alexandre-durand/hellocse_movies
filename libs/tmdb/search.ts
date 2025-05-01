@@ -6,7 +6,7 @@ export interface SearchMoviesParams {
 }
 
 export class SearchClient {
-  constructor(private apiKey: string) {}
+  constructor(private apiKey: string) { }
 
   async searchMovies(params: SearchMoviesParams): Promise<PageResult<Movie>> {
     const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(params.query)}&page=${params.page}&api_key=${this.apiKey}`;
@@ -14,10 +14,11 @@ export class SearchClient {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.apiKey}`,
       },
     });
     if (!response.ok) {
-      throw new Error(`Error searching movies: ${response.statusText}`);
+      throw new Error(`Failed to search movies: ${response.statusText}`);
     }
     return await response.json();
   }

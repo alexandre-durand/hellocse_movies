@@ -1,4 +1,4 @@
-export const { format: formatNumber } = Intl.NumberFormat('fr-FR', {
+export const { format: formatNumberWithOneDigit } = Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 1
 })

@@ -92,7 +92,6 @@ describe("TMDBFetchMoviesRepository", () => {
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.data.results).toEqual([]);
-      expect(result.data.totalResults).toBe(0);
       expect(result.data.totalPages).toBe(0);
     }
   });

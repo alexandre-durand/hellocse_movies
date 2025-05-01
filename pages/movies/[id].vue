@@ -1,12 +1,12 @@
 <template>
-    Child {{ routeID }}
+    <MovieDetails :movie-id="movieId" />
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
 
 
-const routeID = computed(() => {
+const movieId = computed(() => {
     return route.params.id
 })
 </script>

@@ -13,5 +13,10 @@ export default defineNuxtConfig({
   ],
   vuetify: {
     vuetifyOptions: './vuetify.config.ts',
+  },
+  runtimeConfig: {
+    public: {
+      tmdbApiKey: process.env.TMDB_API_KEY,
+    },
   }
 });
