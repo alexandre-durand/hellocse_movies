@@ -1,5 +1,3 @@
-import type { TMDBClient } from "~/libs/tmdb";
-
 export class TMDBRepository {
     protected buildImageURL(path: string): string {
         return `https://image.tmdb.org/t/p/original${path}`;

@@ -19,7 +19,7 @@ export function useInfiniteItems<T>() {
         isLoading.value = false;
     }
 
-    async function fetchNextPage(fetchFn: (page: number) => Promise<any>) {
+    async function fetchNextPage(fetchFn: (page: number) => Promise<void>) {
         if (isLoading.value || (totalPages.value && currentPage.value > totalPages.value)) return;
 
         isLoading.value = true;

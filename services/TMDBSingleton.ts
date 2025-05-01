@@ -1,18 +1,17 @@
 import { TMDBClient } from "~/libs/tmdb";
 
-export class TMDBSingleton {
-  private static instance: TMDBClient;
+const instance: TMDBClient | null = null;
 
-  private constructor() {}
-
-  public static getInstance(apiKey?: string): TMDBClient {
-    if (!TMDBSingleton.instance) {
-      if (!apiKey) {
-        throw new Error("TMDBClient not initialized. Call init() first.");
-      }
-      TMDBSingleton.instance = new TMDBClient(apiKey);
-    }
-   
-    return TMDBSingleton.instance;
+export function initTMDBClient(apiKey: string): TMDBClient {
+  if (instance) {
+    throw new Error("TMDBClient already initialized.");
   }
-}   
+  return new TMDBClient(apiKey);
+}
+
+export function getTMDBClient(): TMDBClient {
+  if (!instance) {
+    throw new Error("TMDBClient not initialized. Call initTMDBClient() first.");
+  }
+  return instance;
+}

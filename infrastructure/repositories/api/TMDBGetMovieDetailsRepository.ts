@@ -20,13 +20,13 @@ export class TMDBGetMovieDetailsRepository extends TMDBRepository implements Get
                 genres: response.genres.map((genre) => genre.name),
                 backdropURL: this.buildImageURL(response.backdrop_path),
                 posterURL: this.buildImageURL(response.poster_path),
-                directors: response.credits!.crew.map((member: any) => ({
+                directors: response.credits!.crew.map((member) => ({
                     id: member.id,
                     name: member.name,
-                    profileURL: this.buildImageURL(member.profile_pat),
+                    profileURL: this.buildImageURL(member.profile_path),
                     job: member.job,
                 })).filter(member => member.job.toLowerCase() === 'director'),
-                cast: response.credits!.cast.map((actor: any) => ({
+                cast: response.credits!.cast.map((actor) => ({
                     id: actor.id,
                     name: actor.name,
                     character: actor.character,
