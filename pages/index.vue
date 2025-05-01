@@ -31,8 +31,8 @@ import { MovieDiscovery, MovieSearch } from '#components';
     const moviesComponents = computed(() => {
         if (search.value && search.value !== '') {
             return MovieSearch 
-        } else {
-            return MovieDiscovery
         }
+        
+        return MovieDiscovery
     });
 </script>

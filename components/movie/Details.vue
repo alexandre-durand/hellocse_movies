@@ -5,6 +5,9 @@
     <div v-if="movieDetails">
         <div class="relative">
             <v-img :src="movieDetails.backdropURL" height="300" cover>
+                <v-btn icon variant="tonal" color="white" class="absolute top-4 left-4" to='/'>
+                    <v-icon>mdi-arrow-left</v-icon>
+                </v-btn>
                 <v-chip label color="white" variant="flat" class="!absolute top-4 right-4">
                     {{ formatNumberWithOneDigit(movieDetails.voteRating) }} <v-icon class="ml-1 mr-2">mdi-star</v-icon>
                     <i class="text-xs">({{movieDetails.voteCount}})</i>

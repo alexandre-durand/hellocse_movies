@@ -29,7 +29,7 @@
 
     const usecase = new FetchMoviesUseCase({
         success(data: PageResult<Movie>) {
-        handlePageResult(data);
+            handlePageResult(data);
         },
         error(msg: string) {
             console.error(msg);
@@ -40,17 +40,12 @@
         await fetchNextPage((page: number) => usecase.execute(page));
     }
 
-    const onLoad = ({done}) => {
-        fetchNextMovies()
+    async function onLoad  ({done}) {
+        await fetchNextMovies()
         if (hasMorePages.value) {
             done('ok')
         } else {
             done('empty')
         }
     }
-
-    onMounted(async () => {
-        await fetchNextMovies(); 
-    });
-   
 </script>
