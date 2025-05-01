@@ -21,7 +21,6 @@ export interface MovieDetails {
     posterURL: string;
     directors: CrewMember[];
     cast: Actor[];
-    crew: CrewMember[];
     runtime: number;
     releaseDate: Date;
     voteCount: number;

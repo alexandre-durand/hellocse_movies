@@ -7,9 +7,12 @@ import type {
 import type { Result } from "~/domain/shared/result";
 import type { TMDBClient } from "~/libs/tmdb/client";
 import { FailureResult, SuccessResult } from "../../../domain/shared/result";
+import { TMDBRepository } from "./TMDBRepository";
 
-export class TMDBFetchMoviesRepository implements FetchMoviesRepository {
-  constructor(private readonly client: TMDBClient) { }
+export class TMDBFetchMoviesRepository extends TMDBRepository implements FetchMoviesRepository {
+  constructor(private readonly client: TMDBClient) {
+    super()
+  }
 
   async fetchMovies(
     params: FetchMoviesRepositoryParams,
@@ -25,7 +28,7 @@ export class TMDBFetchMoviesRepository implements FetchMoviesRepository {
         results: response.results.map((movie) => ({
           title: movie.title,
           id: movie.id,
-          posterURL: 'https://image.tmdb.org/t/p/original' + movie.poster_path,
+          posterURL: this.buildImageURL(movie.poster_path),
           overview: movie.overview,
           voteCount: movie.vote_count,
           voteRating: movie.vote_average,

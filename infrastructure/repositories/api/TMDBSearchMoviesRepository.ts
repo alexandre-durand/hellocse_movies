@@ -7,9 +7,12 @@ import type {
   SearchMoviesRepository,
   SearchMoviesRepositoryParams,
 } from "~/domain/repositories/SearchMoviesRepository";
+import { TMDBRepository } from "./TMDBRepository";
 
-export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
-  constructor(private client: TMDBClient) { }
+export class TMDBSearchMoviesRepository extends TMDBRepository implements SearchMoviesRepository {
+  constructor(private client: TMDBClient) {
+    super()
+  }
 
   async searchMovies(
     params: SearchMoviesRepositoryParams,
@@ -26,7 +29,7 @@ export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
         results: response.results.map((movie) => ({
           title: movie.title,
           id: movie.id,
-          posterURL: 'https://image.tmdb.org/t/p/original' + movie.poster_path,
+          posterURL: this.buildImageURL(movie.poster_path),
           overview: movie.overview,
           voteCount: movie.vote_count,
           voteRating: movie.vote_average,
