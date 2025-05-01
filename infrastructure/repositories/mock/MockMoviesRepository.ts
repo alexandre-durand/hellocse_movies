@@ -37,7 +37,7 @@ export class MockMoviesRepository {
         title: `Movie ${id}`,
         overview: `Overview of Movie $id}`,
 
-        imageURL: `https://picsum.photos/id/${id}/200/300.jpg`,
+        posterURL: `https://picsum.photos/id/${id}/200/300.jpg`,
         voteCount: Math.floor(Math.random() * 1000),
         voteRating: Math.random() * 10,
       });

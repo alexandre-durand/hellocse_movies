@@ -61,7 +61,7 @@ describe("TMDBSearchMoviesRepository", () => {
           {
             title: "Movie 1",
             id: 101,
-            imageURL: "/img1.jpg",
+            posterURL: "/img1.jpg",
             overview: "Desc 1",
             voteCount: 10,
             voteRating: 7.5,
@@ -69,7 +69,7 @@ describe("TMDBSearchMoviesRepository", () => {
           {
             title: "Movie 2",
             id: 102,
-            imageURL: "/img2.jpg",
+            posterURL: "/img2.jpg",
             overview: "Desc 2",
             voteCount: 20,
             voteRating: 8.1,

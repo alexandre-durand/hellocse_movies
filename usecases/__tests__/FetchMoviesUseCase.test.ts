@@ -32,7 +32,7 @@ describe("FetchMoviesUseCase", () => {
         {
           id: 1,
           title: "Movie 1",
-          imageURL: "/path/to/poster1.jpg",
+          posterURL: "/path/to/poster1.jpg",
           overview: "Overview of Movie 1",
           voteCount: 100,
           voteRating: 8.5,
@@ -40,7 +40,7 @@ describe("FetchMoviesUseCase", () => {
         {
           id: 2,
           title: "Movie 2",
-          imageURL: "/path/to/poster2.jpg",
+          posterURL: "/path/to/poster2.jpg",
           overview: "Overview of Movie 2",
           voteCount: 200,
           voteRating: 7.5,

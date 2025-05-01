@@ -9,7 +9,7 @@ import type {
 } from "~/domain/repositories/SearchMoviesRepository";
 
 export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
-  constructor(private client: TMDBClient) {}
+  constructor(private client: TMDBClient) { }
 
   async searchMovies(
     params: SearchMoviesRepositoryParams,
@@ -26,7 +26,7 @@ export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
         results: response.results.map((movie) => ({
           title: movie.title,
           id: movie.id,
-          imageURL: movie.poster_path,
+          posterURL: movie.poster_path,
           overview: movie.overview,
           voteCount: movie.vote_count,
           voteRating: movie.vote_average,

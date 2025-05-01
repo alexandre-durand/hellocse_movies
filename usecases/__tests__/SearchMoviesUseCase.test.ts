@@ -40,7 +40,7 @@ describe("SearchMoviesUseCase", () => {
         {
           id: 1,
           title: "Test Movie",
-          imageURL: "/path/to/image.jpg",
+          posterURL: "/path/to/image.jpg",
           overview: "Overview",
           voteCount: 100,
           voteRating: 8.5,

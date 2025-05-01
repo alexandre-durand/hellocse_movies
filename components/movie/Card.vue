@@ -2,7 +2,7 @@
     <v-card variant="outlined" :to="`/movies/${movie.id}`">
         <v-img
             height="200"
-            :src="movie.imageURL"
+            :src="movie.posterURL"
             cover
             />
            <v-chip label color="yellow" variant="tonal" class="!absolute top-0 right-0">
