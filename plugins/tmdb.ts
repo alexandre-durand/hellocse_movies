@@ -1,4 +1,4 @@
-import { initTMDBClient } from "~/services/TMDBSingleton"
+import { initTMDBClient } from "@/services/TMDBSingleton"
 
 export default defineNuxtPlugin(() => {
     console.log("Initializing TMDB client...")

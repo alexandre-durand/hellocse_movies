@@ -1,18 +1,16 @@
-import type { Movie } from "~/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
+import type { Movie } from "@/domain/entities/Movie";
+import type { PageResult } from "@/domain/entities/PageResult";
 import type {
   FetchMoviesRepository,
   FetchMoviesRepositoryParams,
-} from "~/domain/repositories/FetchMoviesRepository";
-import type { Result } from "~/domain/shared/result";
-import type { TMDBClient } from "~/libs/tmdb/client";
+} from "@/domain/repositories/FetchMoviesRepository";
+import type { Result } from "@/domain/shared/result";
+import type { TMDBClient } from "@/libs/tmdb/client";
 import { FailureResult, SuccessResult } from "../../../domain/shared/result";
-import { TMDBRepository } from "./TMDBRepository";
+import { buildTMBDImageURL } from "./utils";
 
-export class TMDBFetchMoviesRepository extends TMDBRepository implements FetchMoviesRepository {
-  constructor(private readonly client: TMDBClient) {
-    super()
-  }
+export class TMDBFetchMoviesRepository implements FetchMoviesRepository {
+  constructor(private readonly client: TMDBClient) { }
 
   async fetchMovies(
     params: FetchMoviesRepositoryParams,
@@ -28,7 +26,7 @@ export class TMDBFetchMoviesRepository extends TMDBRepository implements FetchMo
         results: response.results.map((movie) => ({
           title: movie.title,
           id: movie.id,
-          posterURL: this.buildImageURL(movie.poster_path),
+          posterURL: buildTMBDImageURL(movie.poster_path),
           overview: movie.overview,
           voteCount: movie.vote_count,
           voteRating: movie.vote_average,

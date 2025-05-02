@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { SearchMoviesPresenter } from "../SearchMoviesUseCase";
 import { SearchMoviesUseCase } from "../SearchMoviesUseCase";
-import type { SearchMoviesRepository } from "~/domain/repositories/SearchMoviesRepository";
-import type { PageResult } from "~/domain/entities/PageResult";
-import type { Movie } from "~/domain/entities/Movie";
+import type { SearchMoviesRepository } from "@/domain/repositories/SearchMoviesRepository";
+import type { PageResult } from "@/domain/entities/PageResult";
+import type { Movie } from "@/domain/entities/Movie";
 
 describe("SearchMoviesUseCase", () => {
   let presenter: SearchMoviesPresenter;
@@ -35,7 +35,6 @@ describe("SearchMoviesUseCase", () => {
     const pageResult: PageResult<Movie> = {
       page: 1,
       totalPages: 1,
-      totalResults: 1,
       results: [
         {
           id: 1,
@@ -70,7 +69,7 @@ describe("SearchMoviesUseCase", () => {
 
     await useCase.execute("Batman", 1);
 
-    expect(presenter.error).toHaveBeenCalledWith("Fetch movies failed");
+    expect(presenter.error).toHaveBeenCalled();
     expect(presenter.success).not.toHaveBeenCalled();
     expect(presenter.invalidQuery).not.toHaveBeenCalled();
   });

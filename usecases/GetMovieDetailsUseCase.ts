@@ -1,9 +1,9 @@
-import type { MovieDetails } from "~/domain/entities/MovieDetails";
-import type { GetMovieDetailsRepository } from "~/domain/repositories/GetMovieDetailsRepository";
+import type { MovieDetails } from "@/domain/entities/MovieDetails";
+import type { GetMovieDetailsRepository } from "@/domain/repositories/GetMovieDetailsRepository";
 
 export interface GetMovieDetailsPresenter {
     success(movieDetails: MovieDetails): void;
-    error(string: string): void;
+    error(message: string): void;
 }
 
 export class GetMovieDetailsUseCase {
@@ -15,6 +15,6 @@ export class GetMovieDetailsUseCase {
             this.presenter.success(result.data);
             return;
         }
-        this.presenter.error(`Get movie details failed: ` + result.error.message);
+        this.presenter.error(`Get movie details failed: ${result.error.message}`);
     }
 }

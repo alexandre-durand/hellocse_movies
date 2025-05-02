@@ -1,4 +1,4 @@
-import type { PageResult } from "~/domain/entities/PageResult";
+import type { PageResult } from "@/domain/entities/PageResult";
 
 export function useInfiniteItems<T>() {
     const items = ref<T[]>([]);

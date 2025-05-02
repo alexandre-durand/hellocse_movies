@@ -1,4 +1,4 @@
-import { TMDBClient } from "~/libs/tmdb";
+import { TMDBClient } from "@/libs/tmdb";
 
 let instance: TMDBClient | null = null;
 

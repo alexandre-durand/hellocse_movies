@@ -7,10 +7,10 @@
 
 <script setup lang="ts">
 import type { Movie } from "@/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
+import type { PageResult } from "@/domain/entities/PageResult";
 import { getTMDBClient } from "@/services/TMDBSingleton";
-import { SearchMoviesUseCase } from "~/usecases/SearchMoviesUseCase";
-import { TMDBSearchMoviesRepository } from "~/infrastructure/repositories/api/TMDBSearchMoviesRepository";
+import { SearchMoviesUseCase } from "@/usecases/SearchMoviesUseCase";
+import { TMDBSearchMoviesRepository } from "@/infrastructure/repositories/api/TMDBSearchMoviesRepository";
 
 const props = defineProps<{
   search: string;

@@ -1,10 +1,10 @@
-import type { Movie } from "~/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
-import type { FetchMoviesRepository } from "~/domain/repositories/FetchMoviesRepository";
+import type { Movie } from "@/domain/entities/Movie";
+import type { PageResult } from "@/domain/entities/PageResult";
+import type { FetchMoviesRepository } from "@/domain/repositories/FetchMoviesRepository";
 
 export interface FetchMoviesPresenter {
   success(movies: PageResult<Movie>): void;
-  error(string: string): void;
+  error(message: string): void;
 }
 
 export class FetchMoviesUseCase {
@@ -20,6 +20,6 @@ export class FetchMoviesUseCase {
       return;
     }
 
-    this.presenter.error(`Fetch movies failed`);
+    this.presenter.error(`Fetch movies failed: ${result.error.message}`);
   }
 }

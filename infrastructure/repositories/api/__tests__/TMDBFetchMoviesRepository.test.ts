@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { TMDBFetchMoviesRepository } from "../TMDBFetchMoviesRepository";
 import type { TMDBClient } from "../../../../libs/tmdb";
+import { buildTMBDImageURL } from "../utils";
 
 describe("TMDBFetchMoviesRepository", () => {
   const mockDiscoverMovies = vi.fn();
@@ -58,7 +59,7 @@ describe("TMDBFetchMoviesRepository", () => {
           {
             id: 1,
             title: "Movie 1",
-            posterURL: "/path/to/poster1.jpg",
+            posterURL: buildTMBDImageURL("/path/to/poster1.jpg"),
             overview: "Overview of Movie 1",
             voteCount: 100,
             voteRating: 8.5,
@@ -66,7 +67,7 @@ describe("TMDBFetchMoviesRepository", () => {
           {
             id: 2,
             title: "Movie 2",
-            posterURL: "/path/to/poster2.jpg",
+            posterURL: buildTMBDImageURL("/path/to/poster2.jpg"),
             overview: "Overview of Movie 2",
             voteCount: 200,
             voteRating: 7.5,

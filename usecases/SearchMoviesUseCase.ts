@@ -1,18 +1,18 @@
-import type { Movie } from "~/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
-import type { SearchMoviesRepository } from "~/domain/repositories/SearchMoviesRepository";
+import type { Movie } from "@/domain/entities/Movie";
+import type { PageResult } from "@/domain/entities/PageResult";
+import type { SearchMoviesRepository } from "@/domain/repositories/SearchMoviesRepository";
 
 export interface SearchMoviesPresenter {
   success(movies: PageResult<Movie>): void;
   invalidQuery(): void;
-  error(string: string): void;
+  error(message: string): void;
 }
 
 export class SearchMoviesUseCase {
   constructor(
     private presenter: SearchMoviesPresenter,
     private movieRepository: SearchMoviesRepository,
-  ) {}
+  ) { }
 
   async execute(query: string, page: number): Promise<void> {
     if (!query || query.trim().length === 0) {
@@ -29,6 +29,6 @@ export class SearchMoviesUseCase {
       return;
     }
 
-    this.presenter.error(`Fetch movies failed`);
+    this.presenter.error(`Fetch movies failed: ${result.error.message}`);
   }
 }

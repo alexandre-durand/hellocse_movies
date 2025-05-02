@@ -1,13 +1,11 @@
-import type { GetMovieDetailsRepository } from "~/domain/repositories/GetMovieDetailsRepository";
-import { FailureResult, SuccessResult, type Result } from "~/domain/shared/result";
-import type { TMDBClient } from "~/libs/tmdb";
-import type { MovieDetails } from "~/domain/entities/MovieDetails";
-import { TMDBRepository } from "./TMDBRepository";
+import type { GetMovieDetailsRepository } from "@/domain/repositories/GetMovieDetailsRepository";
+import { FailureResult, SuccessResult, type Result } from "@/domain/shared/result";
+import type { TMDBClient } from "@/libs/tmdb";
+import type { MovieDetails } from "@/domain/entities/MovieDetails";
+import { buildTMBDImageURL, parseTMBDDate } from "./utils";
 
-export class TMDBGetMovieDetailsRepository extends TMDBRepository implements GetMovieDetailsRepository {
-    constructor(private readonly client: TMDBClient) {
-        super();
-    }
+export class TMDBGetMovieDetailsRepository implements GetMovieDetailsRepository {
+    constructor(private readonly client: TMDBClient) { }
 
     async getDetails(movieId: number): Promise<Result<MovieDetails, Error>> {
         try {
@@ -18,22 +16,22 @@ export class TMDBGetMovieDetailsRepository extends TMDBRepository implements Get
                 title: response.title,
                 overview: response.overview,
                 genres: response.genres.map((genre) => genre.name),
-                backdropURL: this.buildImageURL(response.backdrop_path),
-                posterURL: this.buildImageURL(response.poster_path),
+                backdropURL: buildTMBDImageURL(response.backdrop_path),
+                posterURL: buildTMBDImageURL(response.poster_path),
                 directors: response.credits!.crew.map((member) => ({
                     id: member.id,
                     name: member.name,
-                    profileURL: this.buildImageURL(member.profile_path),
+                    profileURL: buildTMBDImageURL(member.profile_path),
                     job: member.job,
                 })).filter(member => member.job.toLowerCase() === 'director'),
                 cast: response.credits!.cast.map((actor) => ({
                     id: actor.id,
                     name: actor.name,
                     character: actor.character,
-                    profileURL: this.buildImageURL(actor.profile_path),
+                    profileURL: buildTMBDImageURL(actor.profile_path),
                 })),
                 runtime: response.runtime,
-                releaseDate: this.parseDate(response.release_date),
+                releaseDate: parseTMBDDate(response.release_date),
                 voteCount: response.vote_count,
                 voteRating: response.vote_average,
             });

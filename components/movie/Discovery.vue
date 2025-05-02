@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import type { Movie } from "@/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
+import type { PageResult } from "@/domain/entities/PageResult";
 import { FetchMoviesUseCase } from "@/usecases/FetchMoviesUseCase";
 import { TMDBFetchMoviesRepository } from "@/infrastructure/repositories/api/TMDBFetchMoviesRepository";
 import { getTMDBClient } from "@/services/TMDBSingleton";

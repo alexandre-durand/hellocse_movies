@@ -1,18 +1,16 @@
-import type { Movie } from "~/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
-import type { Result } from "~/domain/shared/result";
-import type { TMDBClient } from "~/libs/tmdb/client";
+import type { Movie } from "@/domain/entities/Movie";
+import type { PageResult } from "@/domain/entities/PageResult";
+import type { Result } from "@/domain/shared/result";
+import type { TMDBClient } from "@/libs/tmdb/client";
 import { FailureResult, SuccessResult } from "../../../domain/shared/result";
 import type {
   SearchMoviesRepository,
   SearchMoviesRepositoryParams,
-} from "~/domain/repositories/SearchMoviesRepository";
-import { TMDBRepository } from "./TMDBRepository";
+} from "@/domain/repositories/SearchMoviesRepository";
+import { buildTMBDImageURL } from "./utils";
 
-export class TMDBSearchMoviesRepository extends TMDBRepository implements SearchMoviesRepository {
-  constructor(private client: TMDBClient) {
-    super()
-  }
+export class TMDBSearchMoviesRepository implements SearchMoviesRepository {
+  constructor(private client: TMDBClient) { }
 
   async searchMovies(
     params: SearchMoviesRepositoryParams,
@@ -22,14 +20,14 @@ export class TMDBSearchMoviesRepository extends TMDBRepository implements Search
         query: params.query,
         page: params.page,
       });
+
       return new SuccessResult({
         page: response.page,
-        totalResults: response.total_results,
         totalPages: response.total_pages,
         results: response.results.map((movie) => ({
           title: movie.title,
           id: movie.id,
-          posterURL: this.buildImageURL(movie.poster_path),
+          posterURL: buildTMBDImageURL(movie.poster_path),
           overview: movie.overview,
           voteCount: movie.vote_count,
           voteRating: movie.vote_average,

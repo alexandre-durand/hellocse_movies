@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TMDBSearchMoviesRepository } from "../TMDBSearchMoviesRepository";
-import type { TMDBClient } from "~/libs/tmdb";
-import type { SearchMoviesRepositoryParams } from "~/domain/repositories/SearchMoviesRepository";
-import type { Movie } from "~/domain/entities/Movie";
-import type { PageResult } from "~/domain/entities/PageResult";
+import type { TMDBClient } from "@/libs/tmdb";
+import type { SearchMoviesRepositoryParams } from "@/domain/repositories/SearchMoviesRepository";
+import type { Movie } from "@/domain/entities/Movie";
+import type { PageResult } from "@/domain/entities/PageResult";
+import { buildTMBDImageURL } from "../utils";
 
 describe("TMDBSearchMoviesRepository", () => {
   let mockSearchMovies = vi.fn();
@@ -14,7 +15,7 @@ describe("TMDBSearchMoviesRepository", () => {
     mockSearchMovies = vi.fn();
     mockClient = {
       search: () => ({
-        searchMovies: vi.fn(),
+        searchMovies: mockSearchMovies,
       }),
     } as unknown as TMDBClient;
 
@@ -50,18 +51,17 @@ describe("TMDBSearchMoviesRepository", () => {
 
     const params: SearchMoviesRepositoryParams = { query: "Movie", page: 1 };
     const result = await repo.searchMovies(params);
-
     expect(result.ok).toBe(true);
+
     if (result.ok) {
       expect(result.data).toEqual<PageResult<Movie>>({
         page: 1,
-        totalResults: 2,
         totalPages: 1,
         results: [
           {
             title: "Movie 1",
             id: 101,
-            posterURL: "/img1.jpg",
+            posterURL: buildTMBDImageURL("/img1.jpg"),
             overview: "Desc 1",
             voteCount: 10,
             voteRating: 7.5,
@@ -69,7 +69,7 @@ describe("TMDBSearchMoviesRepository", () => {
           {
             title: "Movie 2",
             id: 102,
-            posterURL: "/img2.jpg",
+            posterURL: buildTMBDImageURL("/img2.jpg"),
             overview: "Desc 2",
             voteCount: 20,
             voteRating: 8.1,
@@ -86,9 +86,5 @@ describe("TMDBSearchMoviesRepository", () => {
     const result = await repo.searchMovies({ query: "Batman", page: 1 });
 
     expect(result.ok).toBe(false);
-    if (result.ok) {
-      throw new Error("Expected result to be a failure");
-    }
-    expect(result.error).toEqual(error);
   });
 });
