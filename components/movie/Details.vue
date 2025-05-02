@@ -31,8 +31,8 @@
           <v-img
             :src="movieDetails.posterURL"
             cover
-            max-height="300"
-            width="200"
+            max-height="400"
+            max-width="300"
             class="rounded-lg"
           />
         </div>
@@ -72,9 +72,8 @@
           </div>
         </div>
       </div>
-      <div class="mt-4">
-        <h2 class="text-xl font-medium">Comments</h2>
-      </div>
+      <v-divider class="my-4" />
+      <MovieCommentSection :movie-id="movieId" class="mt-4" />
     </v-container>
   </div>
 </template>
