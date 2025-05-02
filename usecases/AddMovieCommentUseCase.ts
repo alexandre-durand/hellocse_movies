@@ -1,6 +1,6 @@
-import type { MovieComment } from "~/domain/entities/MovieComment";
-import type { MovieCommentRepository } from "~/domain/repositories/MovieCommentRepository";
-import { MovieCommentMessageValidator, MovieCommentRatingValidator, MovieCommentUserNameValidator } from "~/domain/validators/MovieCommentValidators";
+import type { MovieComment } from "@/domain/entities/MovieComment";
+import type { MovieCommentRepository } from "@/domain/repositories/MovieCommentRepository";
+import { MovieCommentMessageValidator, MovieCommentRatingValidator, MovieCommentUserNameValidator } from "@/domain/validators/MovieCommentValidators";
 
 export interface GetMovieCommentsUseCasePresenter {
     success(comments: MovieComment): void;

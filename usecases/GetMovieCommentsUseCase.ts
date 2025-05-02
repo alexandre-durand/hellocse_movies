@@ -1,5 +1,5 @@
-import type { MovieComment } from "~/domain/entities/MovieComment";
-import type { MovieCommentRepository } from "~/domain/repositories/MovieCommentRepository";
+import type { MovieComment } from "@/domain/entities/MovieComment";
+import type { MovieCommentRepository } from "@/domain/repositories/MovieCommentRepository";
 
 export interface GetMovieCommentsUseCasePresenter {
     success(comments: MovieComment[]): void;

@@ -49,9 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import type { MovieComment } from "~/domain/entities/MovieComment";
-import { LocalStorageMovieCommentRepository } from "~/infrastructure/repositories/localStorage/LocalStorageMovieCommentRepository";
-import { AddMovieCommentUseCase } from "~/usecases/AddMovieCommentUseCase";
+import type { MovieComment } from "@/domain/entities/MovieComment";
+import { LocalStorageMovieCommentRepository } from "@/infrastructure/repositories/localStorage/LocalStorageMovieCommentRepository";
+import { AddMovieCommentUseCase } from "@/usecases/AddMovieCommentUseCase";
 
 const props = defineProps<{
   movieId: number;

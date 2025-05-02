@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { MovieComment } from "~/domain/entities/MovieComment";
+import type { MovieComment } from "@/domain/entities/MovieComment";
 
 const props = defineProps<{
   comments: MovieComment[];
