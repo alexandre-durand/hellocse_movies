@@ -3,28 +3,7 @@
     loading...
   </div>
   <div v-if="movieDetails">
-    <v-img :src="movieDetails.backdropURL" height="300" cover class="relative">
-      <v-btn
-        icon
-        variant="tonal"
-        color="white"
-        class="absolute top-4 left-4"
-        to="/"
-      >
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
-      <v-chip
-        label
-        color="white"
-        variant="flat"
-        class="!absolute top-4 right-4"
-      >
-        {{ formatNumberWithOneDigit(movieDetails.voteRating) }}
-        <v-icon class="ml-1 mr-2">mdi-star</v-icon>
-        <i class="text-xs">({{ movieDetails.voteCount }})</i>
-      </v-chip>
-    </v-img>
-
+    <MovieDetailsBackdrop :movie="movieDetails" />
     <v-container>
       <div class="grid grid-cols-4 gap-4">
         <div class="col-span-1">
@@ -52,24 +31,7 @@
           <h2 class="text-xl font-medium mt-4">Overview</h2>
           <p class="mt-2 tracking-wide">{{ movieDetails.overview }}</p>
 
-          <h2 class="text-xl font-medium mt-4">Casts</h2>
-          <div class="overflow-x-auto mt-4 flex gap-4">
-            <div
-              v-for="actor in movieDetails.cast"
-              :key="actor.id"
-              class="flex flex-col items-center text-center"
-            >
-              <v-img
-                :src="actor.profileURL"
-                cover
-                max-height="150"
-                width="100"
-                class="rounded-lg"
-              />
-              <span class="text-sm mt-2">{{ actor.name }}</span>
-              <span class="text-xs text-gray-500">{{ actor.character }}</span>
-            </div>
-          </div>
+          <MovieDetailsCast :cast="movieDetails.cast" class="mt-4" />
         </div>
       </div>
       <v-divider class="my-4" />
@@ -115,13 +77,3 @@ watch(
   }
 );
 </script>
-
-<style scoped>
-.bottom-gradient {
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.4) 0%,
-    transparent 72px
-  );
-}
-</style>

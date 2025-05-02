@@ -1,6 +1,5 @@
 <template>
   <v-infinite-scroll class="w-full" color="primary" @load="onLoad">
-    search
     <MovieList :movies="movies" />
   </v-infinite-scroll>
 </template>
