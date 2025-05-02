@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import type { Actor } from "@/domain/entities/MovieDetails";
 
-const props = defineProps<{
+defineProps<{
   cast: Actor[];
 }>();
 </script>

@@ -27,15 +27,17 @@ describe('LocalStorageMovieCommentRepository', () => {
     })
 
     it('should return an empty array if no comments exist', async () => {
-        const repo = new LocalStorageMovieCommentRepository() as any
+        const repo = new LocalStorageMovieCommentRepository()
         const result = await repo.getComments({ movieId })
 
         expect(result.ok).toBe(true)
-        expect(result.data).toEqual([])
+        if (result.ok) {
+            expect(result.data).toEqual([])
+        }
     })
 
     it('should add a comment and retrieve it', async () => {
-        const repo = new LocalStorageMovieCommentRepository() as any
+        const repo = new LocalStorageMovieCommentRepository()
 
         const commentParams = {
             movieId,
@@ -46,6 +48,9 @@ describe('LocalStorageMovieCommentRepository', () => {
 
         const addResult = await repo.addComment(commentParams)
         expect(addResult.ok).toBe(true)
+        if (!addResult.ok) {
+            throw new Error('Failed to add comment')
+        }
         expect(addResult.data).toMatchObject({
             userName: commentParams.userName,
             message: commentParams.message,
@@ -54,6 +59,9 @@ describe('LocalStorageMovieCommentRepository', () => {
 
         const getResult = await repo.getComments({ movieId })
         expect(getResult.ok).toBe(true)
+        if (!getResult.ok) {
+            throw new Error('Failed to get comments')
+        }
         expect(getResult.data.length).toBe(1)
         expect(getResult.data[0]).toEqual(addResult.data)
     })
@@ -61,10 +69,12 @@ describe('LocalStorageMovieCommentRepository', () => {
     it('should return error if stored JSON is malformed', async () => {
         localStorageMock.setItem(storageKey, 'INVALID_JSON')
 
-        const repo = new LocalStorageMovieCommentRepository() as any
+        const repo = new LocalStorageMovieCommentRepository()
         const result = await repo.getComments({ movieId })
 
         expect(result.ok).toBe(false)
-        expect(result.error).toBeInstanceOf(Error)
+        if (!result.ok) {
+            expect(result.error).toBeInstanceOf(Error)
+        }
     })
 })

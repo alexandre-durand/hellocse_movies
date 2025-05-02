@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import type { MovieDetails } from "@/domain/entities/MovieDetails";
 
-const props = defineProps<{
+defineProps<{
   movie: MovieDetails;
 }>();
 </script>

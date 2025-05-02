@@ -3,8 +3,6 @@ import type { AddCommentParams, GetCommentParams, MovieCommentRepository } from 
 import { FailureResult, SuccessResult, type Result } from "@/domain/shared/result";
 
 export class LocalStorageMovieCommentRepository implements MovieCommentRepository {
-    public constructor() { }
-
     public async getComments(params: GetCommentParams): Promise<Result<MovieComment[], Error>> {
         try {
             const storageKey = this.buildKey(params.movieId);

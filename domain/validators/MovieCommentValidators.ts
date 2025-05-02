@@ -3,7 +3,6 @@ export class MovieCommentUserNameValidator {
     private minLength = 3;
     private maxLength = 50;
     private allowedChars = /^[a-zA-Z_ ]+$/;
-    constructor() { }
 
     isValid(userName: string): boolean {
         return this.isValidLength(userName) && this.isValidAlpha(userName);
@@ -33,7 +32,6 @@ export class MovieCommentMessageValidator {
     private minLength = 3;
     private maxLength = 500;
     private allowedChars = /^[a-zA-Z0-9_.,!? ]+$/;
-    constructor() { }
 
     isValid(message: string): boolean {
         return this.isValidLength(message) && this.isValidAlpha(message);
@@ -63,7 +61,6 @@ export class MovieCommentMessageValidator {
 export class MovieCommentRatingValidator {
     private minRating = 1;
     private maxRating = 10;
-    constructor() { }
 
     isValid(rating: number): boolean {
         return this.isValidRange(rating) && this.isInteger(rating);

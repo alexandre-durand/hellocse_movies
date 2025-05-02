@@ -39,7 +39,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn variant="text" @click="closeModal">Close</v-btn>
-          <v-spacer></v-spacer>
+          <v-spacer />
 
           <v-btn type="submit" color="primary" variant="flat">Submit</v-btn>
         </v-card-actions>

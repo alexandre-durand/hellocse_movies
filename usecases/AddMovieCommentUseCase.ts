@@ -37,7 +37,7 @@ export class AddMovieCommentUseCase {
             this.presenter.invalidRating(this.ratingValidator.getValidationError(params.rating));
             return;
         }
-        console.log(params)
+
         const result = await this.repository.addComment(params);
 
         if (result.ok) {

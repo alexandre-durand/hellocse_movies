@@ -4,9 +4,9 @@
     <div class="flex">
       <v-spacer />
       <v-btn
-        @click="showAddCommentDialog = true"
         color="primary"
         variant="flat"
+        @click="showAddCommentDialog = true"
       >
         Add comment</v-btn
       >

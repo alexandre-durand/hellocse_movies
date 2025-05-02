@@ -4,8 +4,8 @@
       No comments yet.
     </div>
     <MovieCommentCard
-      v-else
       v-for="comment in orderedComments"
+      v-else
       :key="comment.id"
       :comment="comment"
     />
@@ -20,7 +20,7 @@ const props = defineProps<{
 }>();
 
 const orderedComments = computed(() => {
-  return props.comments.sort((a, b) => {
+  return [...props.comments].sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 });
